@@ -76,6 +76,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="flex justify-center items-center py-2 text-2xl">
+        # 3<sup className="text-red-500">4</sup> * 10/31 #
+      </div>
     </footer>
   );
 };

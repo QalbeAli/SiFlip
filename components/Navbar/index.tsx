@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import HeaderCountDown from "../HeaderCountDown";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,7 @@ const Navbar = () => {
   return (
     <nav className="w-full z-50 bg-gradient-to-r from-black via-red-900 to-black border-b border-red-800">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo or Brand Name */}
           <div className="flex items-center justify-between h-20">
             {/* Logo Image */}
@@ -29,7 +30,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
+          {/* <div className="hidden md:flex space-x-8">
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -39,8 +40,8 @@ const Navbar = () => {
                 {item.label}
               </a>
             ))}
-          </div>
-
+          </div> */}
+          <HeaderCountDown />
           {/* Hamburger Icon for Mobile */}
           <div className="md:hidden">
             <button
