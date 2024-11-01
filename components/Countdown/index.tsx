@@ -10,11 +10,11 @@ const Countdown = () => {
   });
 
   useEffect(() => {
-    const targetDate: any = new Date("2024-11-08T00:00:00");
+    const targetDate: Date = new Date("2024-11-08T00:00:00");
 
     const calculateTimeLeft = () => {
-      const now: any = new Date();
-      const difference = targetDate - now;
+      const now: Date = new Date();
+      const difference: number = targetDate.getTime() - now.getTime();
 
       if (difference > 0) {
         setTimeLeft({

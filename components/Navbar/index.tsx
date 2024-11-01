@@ -19,7 +19,14 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo or Brand Name */}
-          <div className="text-white text-xl font-bold">BrandName</div>
+          <div className="flex items-center justify-between h-20">
+            {/* Logo Image */}
+            <img
+              src="/logo.png" // Adjust the path based on where your logo is located
+              alt="SiFlip Logo"
+              className="h-14 w-auto md:h-24" // Adjust the height and width as needed
+            />
+          </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">

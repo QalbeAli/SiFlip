@@ -1,12 +1,17 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, RefObject } from "react";
 import { Play, Pause, Maximize, Volume2, VolumeX } from "lucide-react";
 
 const VideoShowcase = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const videoRef: RefObject<FullscreenVideoElement> = useRef(null);
+
+  interface FullscreenVideoElement extends HTMLVideoElement {
+    webkitRequestFullscreen?: () => Promise<void>;
+    msRequestFullscreen?: () => Promise<void>;
+  }
 
   const handlePlayPause = () => {
     if (videoRef.current) {
@@ -36,28 +41,18 @@ const VideoShowcase = () => {
     if (videoRef.current) {
       if (videoRef.current.requestFullscreen) {
         videoRef.current.requestFullscreen();
-      } else if ((videoRef.current as any).webkitRequestFullscreen) {
-        (videoRef.current as any).webkitRequestFullscreen();
-      } else if ((videoRef.current as any).msRequestFullscreen) {
-        (videoRef.current as any).msRequestFullscreen();
+      } else if (videoRef.current.webkitRequestFullscreen) {
+        videoRef.current.webkitRequestFullscreen();
+      } else if (videoRef.current.msRequestFullscreen) {
+        videoRef.current.msRequestFullscreen();
       }
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-red-900 to-black">
-      {/* Header Section */}
-      <div className="pt-24 pb-12 px-4">
-        <h1 className="text-6xl md:text-8xl text-center font-bold text-white mb-6 animate-fade-in">
-          Featured <span className="text-red-500">Video</span>
-        </h1>
-        <p className="text-gray-300 text-center max-w-2xl mx-auto text-xl animate-fade-in-delay">
-          Experience our latest creation in full cinematic glory
-        </p>
-      </div>
-
+    <div className="z-50">
       {/* Video Section */}
-      <div className="max-w-6xl mx-auto px-4 mb-20">
+      <div className="max-w-6xl mx-auto px-4 my-20">
         <div
           className="relative group rounded-lg overflow-hidden transform hover:scale-[1.01] transition-transform duration-300"
           onMouseEnter={() => setIsHovered(true)}
@@ -116,32 +111,6 @@ const VideoShowcase = () => {
                 <Maximize size={24} />
               </button>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Video Description */}
-      <div className="max-w-4xl mx-auto px-4 pb-20">
-        <div className="bg-black/30 backdrop-blur-sm rounded-lg p-8 transform hover:-translate-y-1 transition-transform duration-300">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            About This Video
-          </h2>
-          <p className="text-gray-300 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </p>
-          <div className="mt-6 flex flex-wrap gap-4">
-            <span className="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">
-              #Feature
-            </span>
-            <span className="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">
-              #Showcase
-            </span>
-            <span className="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">
-              #Highlight
-            </span>
           </div>
         </div>
       </div>
